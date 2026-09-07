@@ -5,6 +5,18 @@
 
 把"小红书付费投流"做成可复用的决策框架：**先算账、再投放；先测试、再放量；以数据决策，不靠感觉。**
 
+## ✨ 一行安装（推荐 · 通用 skills CLI）
+
+仓库已按标准 `skills/<name>/` 目录组织，可直接通过 [`skills`](https://www.npmjs.com/package/skills) CLI 安装到 Claude Code / Codex / Cursor / WorkBuddy / OpenCode 等 70+ Agent：
+
+```bash
+# 装到某个 Agent（以 Claude Code 为例）
+npx -y skills add songtingliang82-dot/xhs-juguang-ops -g -a claude-code -y
+
+# 或一次性装到全部 Agent
+npx -y skills add songtingliang82-dot/xhs-juguang-ops -g --all -y
+```
+
 ## ✨ 能力清单
 
 | 环节 | 你能得到 |
@@ -22,30 +34,57 @@
 
 ```
 xhs-juguang-ops/
-├── SKILL.md                          # 技能入口（触发词+工作流）
-├── references/                       # 方法论文档（按需加载）
-│   ├── 01-开户资质与行业准入.md
-│   ├── 02-计划搭建与出价预算.md
-│   ├── 03-投放诊断决策树.md
-│   ├── 04-素材与笔记内容方法.md
+├── skills/xhs-juguang-ops/             # 标准 skills 目录（npx CLI 自动识别）
+│   ├── SKILL.md                        # 技能入口（触发词+工作流）
+│   ├── references/                     # 方法论文档（按需加载）
+│   │   ├── 01-开户资质与行业准入.md
+│   │   ├── 02-计划搭建与出价预算.md
+│   │   ├── 03-投放诊断决策树.md
+│   │   ├── 04-素材与笔记内容方法.md
+│   │   ├── 05-私信承接与数据口径.md
+│   │   ├── 06-合规红线清单.md
+│   │   └── 07-留学国际教育投放专篇.md
+│   ├── templates/                      # 可直接使用的表格模板
+│   │   ├── 投放计划表.md
+│   │   ├── 关键词词表.md
+│   │   └── 投放台账ROI.md
+│   └── examples/
+│       └── 示例-留学国际教育投放方案.md
+├── README.md                           # 你正在读的
+├── LICENSE                             # MIT
+├── AI_INSTRUCTIONS.md                  # 给目标 AI 的一段话指令
+├── install.sh / install.ps1            # 不依赖 Node 时的兜底安装脚本
+└── .gitattributes
+```
 │   ├── 05-私信承接与数据口径.md
 │   ├── 06-合规红线清单.md
 │   └── 07-留学国际教育投放专篇.md
-├── templates/                        # 可直接使用的表格模板
-│   ├── 投放计划表.md
-│   ├── 关键词词表.md
-│   └── 投放台账ROI.md
-└── examples/
-    └── 示例-留学国际教育投放方案.md   # 从咨询到落地的完整交付示例
+├── README.md                           # 你正在读的
+├── LICENSE                             # MIT
+├── AI_INSTRUCTIONS.md                  # 给目标 AI 的一段话指令
+├── install.sh / install.ps1            # 不依赖 Node 时的兜底安装脚本
+└── .gitattributes
 ```
 
 ## 🚀 安装
 
-### 🤖 给任意 AI 的一句话指令（最快）
+### ⚡ 一行安装（首选 · 通用 skills CLI）
 
-把 [AI_INSTRUCTIONS.md](./AI_INSTRUCTIONS.md) 里的「指令原文」整段复制发给你的 AI（Claude / GPT / Codex…），它会**自己 clone 仓库并安装、内化**，然后直接按技能给你投流建议。
+仓库已按标准 `skills/<name>/` 目录组织，可通过 [`skills`](https://www.npmjs.com/package/skills) CLI 一键装到 Claude Code / Codex / Cursor / WorkBuddy / OpenCode 等 70+ Agent：
 
-### 一键安装（推荐）
+```bash
+# 装到某个 Agent（以 Claude Code 为例）
+npx -y skills add songtingliang82-dot/xhs-juguang-ops -g -a claude-code -y
+
+# 或一次性装到全部 Agent
+npx -y skills add songtingliang82-dot/xhs-juguang-ops -g --all -y
+```
+
+### 🤖 给任意 AI 的一句话指令（让 AI 自己装）
+
+把 [AI_INSTRUCTIONS.md](./AI_INSTRUCTIONS.md) 里的「指令原文」整段复制发给你的 AI（Claude / GPT / Codex…），它会**自己 clone 仓库并安装/内化**，然后直接按技能给你投流建议。
+
+### 兜底：手动 / 脚本安装（不依赖 Node）
 
 ```bash
 # 1. 获取仓库
@@ -53,8 +92,8 @@ git clone https://github.com/songtingliang82-dot/xhs-juguang-ops.git
 cd xhs-juguang-ops
 
 # 2. macOS / Linux
-./install.sh                        # 装到所有已支持 Agent
-./install.sh --target claude,codex  # 或指定(逗号分隔): claude codex workbuddy grok agents
+./install.sh                       # 装到所有已支持 Agent
+./install.sh --target claude,codex # 或指定(逗号分隔): claude codex workbuddy grok agents
 ```
 
 ```powershell
@@ -64,10 +103,6 @@ cd xhs-juguang-ops
 .\install.ps1 -Target claude,codex  # 或指定
 ```
 
-安装完成后重启 Agent 会话即生效。
-
-### 手动安装
-
 | Agent | Skills 目录（放入 xhs-juguang-ops 文件夹） |
 |---|---|
 | **WorkBuddy** | Windows: `%USERPROFILE%\.workbuddy\skills\` ／ macOS: `~/.workbuddy/skills/` |
@@ -75,16 +110,6 @@ cd xhs-juguang-ops
 | **OpenAI Codex** | `~/.codex/skills/`（项目级 `.codex/skills/`） |
 | **Grok CLI** | `~/.grok/skills/` |
 | **通用 Agents** | `~/.agents/skills/` |
-
-```bash
-# 手动拷贝示例(macOS/Linux)
-git clone https://github.com/songtingliang82-dot/xhs-juguang-ops.git
-cp -r xhs-juguang-ops ~/.claude/skills/
-cp -r xhs-juguang-ops ~/.codex/skills/
-```
-
-### 打包版
-仓库 Releases / 本目录亦可直接使用 `SKILL.md` 内容作为提示词模板。
 
 ## ⚠️ 使用须知
 

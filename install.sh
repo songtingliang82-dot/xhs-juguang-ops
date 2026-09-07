@@ -6,12 +6,15 @@
 #   ./install.sh --target claude       # 只装 Claude Code
 #   ./install.sh --target claude,codex # 装多个, 逗号分隔
 #   可用 target: claude codex workbuddy grok agents
+# 注意: 如果你的 Agent 支持通用 skills CLI, 推荐使用
+#   npx -y skills add songtingliang82-dot/xhs-juguang-ops -g -a <agent> -y
+#   本脚本是兜底方案(不依赖 Node.js)
 # =============================================================================
 set -euo pipefail
 
 SKILL_NAME="xhs-juguang-ops"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SRC="$SCRIPT_DIR"   # 仓库根即技能内容 (SKILL.md 在根目录)
+SRC="$SCRIPT_DIR/skills/$SKILL_NAME"   # 仓库已按标准 skills/<name>/ 结构组织
 
 declare -A DIRS=(
   [claude]="$HOME/.claude/skills"
@@ -24,6 +27,9 @@ declare -A DIRS=(
 usage() {
   echo "用法: ./install.sh [--target claude,codex,...|all]"
   echo "可用 target: ${!DIRS[*]} | all"
+  echo ""
+  echo "提示: 通用 skills CLI 一行安装(更推荐):"
+  echo "  npx -y skills add songtingliang82-dot/xhs-juguang-ops -g -a claude-code -y"
   exit 0
 }
 
@@ -41,7 +47,7 @@ IFS=',' read -ra picks <<< "$(echo "$TARGET" | tr ' ' ',')"
 
 installed=0
 for key in "${picks[@]}"; do
-  key="$(echo "$key" | xargs)"           # 去空格
+  key="$(echo "$key" | xargs)"
   [[ -z "$key" ]] && continue
   base="${DIRS[$key]:-}"
   if [[ -z "$base" ]]; then
@@ -50,15 +56,7 @@ for key in "${picks[@]}"; do
   dest="$base/$SKILL_NAME"
   mkdir -p "$base"
   rm -rf "$dest"
-  mkdir -p "$dest"
-  # 拷贝技能内容(跳过 .git 与本安装脚本自身)
-  cp -R "$SRC"/SKILL.md "$SRC"/references "$SRC"/templates "$SRC"/examples "$SRC"/README.md "$SRC"/LICENSE "$dest"/ 2>/dev/null || {
-    cp -R "$SRC"/SKILL.md "$dest"/
-    cp -R "$SRC"/references "$dest"/
-    cp -R "$SRC"/templates "$dest"/
-    cp -R "$SRC"/examples "$dest"/
-    cp -R "$SRC"/README.md "$SRC"/LICENSE "$dest"/
-  }
+  cp -R "$SRC"/. "$dest"/
   echo "✅ 已安装到 $dest"
   installed=$((installed+1))
 done

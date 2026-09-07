@@ -6,6 +6,9 @@
 #   .\install.ps1 -Target claude       # 只装 Claude Code
 #   .\install.ps1 -Target claude,codex # 装多个, 逗号分隔
 #   可用 Target: claude codex workbuddy grok agents
+# 注意: 如果你的 Agent 支持通用 skills CLI, 推荐使用
+#   npx -y skills add songtingliang82-dot/xhs-juguang-ops -g -a claude-code -y
+#   本脚本是兜底方案(不依赖 Node.js)
 # 提示: 若被安全策略拦截, 先执行 Set-ExecutionPolicy -Scope Process Bypass
 # =============================================================================
 #>
@@ -14,7 +17,8 @@ param(
 )
 
 $SkillName = "xhs-juguang-ops"
-$Root = $PSScriptRoot   # 仓库根即技能内容 (SKILL.md 在根目录)
+$Root = $PSScriptRoot
+$Src = Join-Path $Root "skills\$SkillName"   # 仓库已按标准 skills/<name>/ 结构组织
 
 $Map = [ordered]@{
     "claude"    = Join-Path $HOME ".claude\skills"
@@ -38,16 +42,11 @@ foreach ($key in ($Target -split ",")) {
     $dest = Join-Path $base $SkillName
     New-Item -ItemType Directory -Force -Path $base | Out-Null
     if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
-    New-Item -ItemType Directory -Force -Path $dest | Out-Null
-
-    # 拷贝技能内容 (SKILL.md / references / templates / examples / README / LICENSE)
-    Copy-Item -Force (Join-Path $Root "SKILL.md") $dest
-    Copy-Item -Recurse -Force (Join-Path $Root "references") $dest
-    Copy-Item -Recurse -Force (Join-Path $Root "templates") $dest
-    Copy-Item -Recurse -Force (Join-Path $Root "examples") $dest
-    Copy-Item -Force (Join-Path $Root "README.md") $dest
-    if (Test-Path (Join-Path $Root "LICENSE")) { Copy-Item -Force (Join-Path $Root "LICENSE") $dest }
-
+    if (Test-Path $Src) {
+        Copy-Item -Recurse -Force "$Src\*" $dest
+    } else {
+        Write-Host "⚠️ 未找到源码 $Src"; continue
+    }
     Write-Host "✅ 已安装到 $dest" -ForegroundColor Green
     $installed++
 }
