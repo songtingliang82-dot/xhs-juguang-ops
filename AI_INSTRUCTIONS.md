@@ -1,6 +1,12 @@
 # AI_INSTRUCTIONS.md · 给目标 AI 的安装与使用指令
 
-> 用法：把下方【指令原文】整段复制，粘贴给你想安装此技能的任意 AI（Claude、GPT、Gemini、Codex 等）。它会自行安装/内化技能并按方法论给你建议。
+> 用法：把下方任意一段复制，粘贴给你想安装此技能的 AI 或人。按"从短到长"选。
+
+---
+
+## 🥇 极速版（一句话，最适合直接转发）
+
+> 帮我把这个技能装好并学会用：https://github.com/songtingliang82-dot/xhs-juguang-ops （小红书聚光投放/留学获客，先看 skills/xhs-juguang-ops 里的 SKILL.md）。装好回"已就绪"。
 
 ---
 
