@@ -41,6 +41,10 @@ xhs-juguang-ops/
 
 ## 🚀 安装
 
+### 🤖 给任意 AI 的一句话指令（最快）
+
+把 [AI_INSTRUCTIONS.md](./AI_INSTRUCTIONS.md) 里的「指令原文」整段复制发给你的 AI（Claude / GPT / Codex…），它会**自己 clone 仓库并安装、内化**，然后直接按技能给你投流建议。
+
 ### 一键安装（推荐）
 
 ```bash
