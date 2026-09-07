@@ -1,3 +1,4 @@
 # 确保 shell 脚本以 LF 行尾保存(clone 后可直接运行)
 *.sh text eol=lf
 *.ps1 text eol=crlf
+*.bat text eol=crlf

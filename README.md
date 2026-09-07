@@ -68,7 +68,15 @@ xhs-juguang-ops/
 
 ## 🚀 安装
 
-### ⚡ 一行安装（首选 · 通用 skills CLI）
+### 🐣 新手三步（Windows · 最简单，不用任何命令）
+
+1. **下载**：点本仓库绿色 **Code** → **Download ZIP**（或直接打开 `https://github.com/songtingliang82-dot/xhs-juguang-ops/archive/refs/heads/main.zip`）
+2. **解压**：右键 zip → 全部解压（得到文件夹 `xhs-juguang-ops-main`）
+3. **双击**：进入该文件夹，双击 **`install.bat`** → 看到"已自动安装到 N 个 AI"即完成
+
+> 安装器会自动识别电脑上已有的 WorkBuddy / Claude Code / Codex / Cursor / Grok 等技能目录并装进去。装完**重启对应 AI**，对它说「我要做小红书留学获客投放，帮我出一份完整方案」即可生效。
+
+### ⚡ 一行安装（技术用户 · 通用 skills CLI）
 
 仓库已按标准 `skills/<name>/` 目录组织，可通过 [`skills`](https://www.npmjs.com/package/skills) CLI 一键装到 Claude Code / Codex / Cursor / WorkBuddy / OpenCode 等 70+ Agent：
 

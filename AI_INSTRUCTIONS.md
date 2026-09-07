@@ -46,4 +46,5 @@
 - **Q：AI 说"我没有 skills 目录机制"？** → 让它直接把 `skills/xhs-juguang-ops/` 内的 SKILL.md 与 references/ 全部读一遍并承诺按此执行（等效内化）。
 - **Q：clone 很慢/失败？** → 用 zip 下载替代；或在国内网络为 git 配置可用代理后重试。
 - **Q：装完没生效？** → 重启会话；确认放入了正确的用户级 skills 目录而非项目临时目录。
-- **Q：通用 skills CLI 不存在？** → 用上面的"手动安装"路径；`install.sh / install.ps1` 是无 Node 环境时的兜底方案。
+- **Q：Windows 用户不会命令行？** → 下载仓库 ZIP → 解压 → 双击 `install.bat`，自动装到所有已识别的 Agent 技能目录。
+- **Q：通用 skills CLI 不存在？** → 用上方的"手动安装"路径；`install.sh / install.ps1 / install.bat` 是无 Node 环境时的兜底方案。
