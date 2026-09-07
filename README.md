@@ -41,16 +41,43 @@ xhs-juguang-ops/
 
 ## 🚀 安装
 
-### WorkBuddy（本机技能）
-```bash
-# 将本仓库 clone 或下载后，放入用户技能目录：
-#   Windows: %USERPROFILE%\.workbuddy\skills\xhs-juguang-ops\
-#   macOS:   ~/.workbuddy/skills/xhs-juguang-ops/
-```
-装好后对 AI 说「帮我校验我的小红书投放计划 / 诊断一下为什么没消耗 / 出一份留学获客投放方案」，技能会自动被调用。
+### 一键安装（推荐）
 
-### 其他 Agent（Claude / Cursor 等）
-把 `SKILL.md` 与 `references/`、`templates/`、`examples/` 放入对应产品的 skills 目录（如 `~/.claude/skills/`），并按其约定配置。
+```bash
+# 1. 获取仓库
+git clone https://github.com/songtingliang82-dot/xhs-juguang-ops.git
+cd xhs-juguang-ops
+
+# 2. macOS / Linux
+./install.sh                        # 装到所有已支持 Agent
+./install.sh --target claude,codex  # 或指定(逗号分隔): claude codex workbuddy grok agents
+```
+
+```powershell
+# Windows PowerShell
+cd xhs-juguang-ops
+.\install.ps1                       # 装到所有已支持 Agent
+.\install.ps1 -Target claude,codex  # 或指定
+```
+
+安装完成后重启 Agent 会话即生效。
+
+### 手动安装
+
+| Agent | Skills 目录（放入 xhs-juguang-ops 文件夹） |
+|---|---|
+| **WorkBuddy** | Windows: `%USERPROFILE%\.workbuddy\skills\` ／ macOS: `~/.workbuddy/skills/` |
+| **Claude Code** | `~/.claude/skills/`（项目级 `.claude/skills/`） |
+| **OpenAI Codex** | `~/.codex/skills/`（项目级 `.codex/skills/`） |
+| **Grok CLI** | `~/.grok/skills/` |
+| **通用 Agents** | `~/.agents/skills/` |
+
+```bash
+# 手动拷贝示例(macOS/Linux)
+git clone https://github.com/songtingliang82-dot/xhs-juguang-ops.git
+cp -r xhs-juguang-ops ~/.claude/skills/
+cp -r xhs-juguang-ops ~/.codex/skills/
+```
 
 ### 打包版
 仓库 Releases / 本目录亦可直接使用 `SKILL.md` 内容作为提示词模板。
